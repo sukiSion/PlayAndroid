@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">PlayAndroid</string>
+
+    <string name="home_page">首页</string>
+
+    <string name="project">项目</string>
+
+    <string name="official_account">公众号</string>
+
+    <string name="mine">我的</string>
+
 </resources>
