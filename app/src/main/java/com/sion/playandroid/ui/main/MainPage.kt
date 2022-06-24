@@ -71,7 +71,11 @@ fun MainPage(actions: PlayActions,viewModel: HomeViewModel = viewModel()) {
 
                 CourseTabs.HOME_PAGE -> HomePage(actions = actions, modifier = modifier)
 
+                CourseTabs.PROJECT -> {}
 
+                CourseTabs.OFFICIAL_ACCOUNT ->{}
+
+                CourseTabs.MINE -> {}
             }
 
 
