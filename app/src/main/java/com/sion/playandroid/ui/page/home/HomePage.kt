@@ -7,13 +7,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.sion.playandroid.logic.model.HomePageViewModel
 import com.sion.playandroid.ui.main.PlayActions
 import  androidx.lifecycle.viewmodel.compose.viewModel
+import com.sion.bannerpagetest.banner.ui.BannerPager
 import com.sion.playandroid.R
-import com.sion.playandroid.logic.model.BannerBean
-import com.sion.playandroid.logic.model.PlayLoading
-import com.sion.playandroid.logic.model.PlaySuccess
+import com.sion.playandroid.logic.model.*
 import com.sion.playandroid.ui.view.Lce.LcePage
 import com.sion.playandroid.ui.view.PlayAppBar
 
@@ -38,12 +36,23 @@ fun HomePage(actions: PlayActions, modifier: Modifier = Modifier,viewModel:HomeP
 
             val data = bannerData as PlaySuccess<List<BannerBean>>
 
+            BannerPager(items = data.data){
+
+                actions.enterArticle(
+
+                    ArticleModel(
+
+                        title = it.title,
+                        link = it.url
+                    )
+
+                )
+
+            }
 
 
         }
         
     }
-
-
 
 }

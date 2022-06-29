@@ -1,5 +1,6 @@
 package com.sion.playandroid.logic.model
 
+import com.sion.bannerpagetest.banner.logic.model.BaseBannerBean
 
 
 data class BannerBean(
