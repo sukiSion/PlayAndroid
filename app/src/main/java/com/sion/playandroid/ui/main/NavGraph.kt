@@ -54,12 +54,7 @@ fun NavGraph(startDestination: String = PlayDestinations.HOME_PAGE_ROUTE){
 
             val fromJson = Gson().fromJson(parcelable,ArticleModel::class.java)
 
-            ArticlePage(fromJson){
-
-                actions.upPress
-
-            }
-
+            ArticlePage(article = fromJson, onBack = actions.upPress)
         }
 
     }

@@ -1,11 +1,15 @@
 package com.sion.playandroid.ui.main
 
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.google.gson.Gson
 import com.sion.playandroid.logic.model.ArticleModel
+import com.sion.playandroid.logic.utils.getHtmlText
 import java.net.URLEncoder
 
-class PlayActions(navController: NavController) {
+class PlayActions(navController: NavHostController) {
+
+
 
 
     val enterArticle:(ArticleModel) -> Unit = {
@@ -13,16 +17,10 @@ class PlayActions(navController: NavController) {
         article ->
 
         article.desc = ""
-
-//        article.title =
-
-        // 转为Json字符串
+        article.title = getHtmlText(article.title)
         val gson = Gson().toJson(article).trim()
-
-        // 更改字符编码
-        val  result = URLEncoder.encode(gson,"utf-8")
-
-        navController.navigate("${PlayDestinations.ARTICLE_ROUTE}/$result")
+        val result = URLEncoder.encode(gson, "utf-8")
+        toAnimView(navController = navController, "${PlayDestinations.ARTICLE_ROUTE}/$result")
 
     }
 

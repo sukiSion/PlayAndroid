@@ -8,7 +8,7 @@ import com.sion.playandroid.logic.model.PlaySuccess
 
 
 @Composable
-fun LcePage(playState: PlayState,onErrorClick:() -> Unit, content :@Composable () -> Unit ){
+fun  LcePage(playState: PlayState,onErrorClick:() -> Unit, content :@Composable () -> Unit ){
 
     when(playState){
 

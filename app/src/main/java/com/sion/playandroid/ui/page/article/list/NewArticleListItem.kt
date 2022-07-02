@@ -76,7 +76,7 @@ fun NewArticleListItem(
 
                 Text(text = getHtmlText(article.title),
                 style = MaterialTheme.typography.subtitle1,
-                maxLines = 1,
+                maxLines = if (hasImage) 2 else 1,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier
                     .weight(1f)

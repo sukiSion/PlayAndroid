@@ -9,6 +9,18 @@
 
     <string name="mine">我的</string>
 
-    <string name="bad_network_view_tip">Your network is not to force, can tap the screen to reload</string>
+    <string name="bad_network_view_tip">点击屏幕重新加载</string>
+
+    <string name="no_network">当前网络不可达</string>
+
+    <string name="share_article">分享文章</string>
+
+    <string name="telephone">手机号码</string>
+    
+    <string name="mine_nuggets">掘金</string>
+    
+    <string name="mine_blog">我的博客</string>
+    
+    <string name="mine_github">我的Github</string>
 
 </resources>

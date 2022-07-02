@@ -13,6 +13,8 @@ import androidx.compose.ui.res.stringResource
 import com.sion.playandroid.logic.model.HomeViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sion.playandroid.ui.page.home.HomePage
+import com.sion.playandroid.ui.page.mine.ProfilePage
+import com.sion.playandroid.ui.page.project.ProjectPage
 import java.util.*
 
 @ExperimentalStdlibApi
@@ -69,13 +71,22 @@ fun MainPage(actions: PlayActions,viewModel: HomeViewModel = viewModel()) {
 
             when(it){
 
-                CourseTabs.HOME_PAGE -> HomePage(actions = actions, modifier = modifier)
+                CourseTabs.HOME_PAGE -> HomePage( modifier = modifier){
 
-                CourseTabs.PROJECT -> {}
+                    actions.enterArticle(it)
+
+                }
+
+                CourseTabs.PROJECT -> {
+                    ProjectPage(modifier = modifier, enterArticle = actions.enterArticle)}
 
                 CourseTabs.OFFICIAL_ACCOUNT ->{}
 
-                CourseTabs.MINE -> {}
+                CourseTabs.MINE -> {
+                    
+                    ProfilePage(action = actions)
+                    
+                }
             }
 
 

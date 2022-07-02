@@ -1,24 +1,42 @@
 package com.sion.playandroid.ui.page.home
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.sion.playandroid.ui.main.PlayActions
-import  androidx.lifecycle.viewmodel.compose.viewModel
-import com.sion.bannerpagetest.banner.ui.BannerPager
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.sion.playandroid.R
 import com.sion.playandroid.logic.model.*
 import com.sion.playandroid.ui.view.Lce.LcePage
 import com.sion.playandroid.ui.view.PlayAppBar
+import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 @Composable
-fun HomePage(actions: PlayActions, modifier: Modifier = Modifier,viewModel:HomePageViewModel = viewModel()){
+fun HomePage(modifier: Modifier = Modifier,
+             viewModel: HomePageViewModel = viewModel(),
+             toArticleDetails: (ArticleModel) -> Unit){
 
     val bannerData by viewModel.bannerState.observeAsState(PlayLoading)
+
+    var loadArticleState by rememberSaveable { mutableStateOf(false) }
+
+
+    val lazyPagingItems = viewModel.articleResult.collectAsLazyPagingItems()
+
+    if (!loadArticleState) {
+
+        loadArticleState = true
+
+        viewModel.getData()
+
+    }
+
 
     viewModel.getData()
     
@@ -28,7 +46,9 @@ fun HomePage(actions: PlayActions, modifier: Modifier = Modifier,viewModel:HomeP
         showBack = false)
 
 
-        LcePage(playState = bannerData, onErrorClick = {
+        LcePage(playState = bannerData,
+
+            onErrorClick = {
 
             viewModel.getData()
 
@@ -36,23 +56,15 @@ fun HomePage(actions: PlayActions, modifier: Modifier = Modifier,viewModel:HomeP
 
             val data = bannerData as PlaySuccess<List<BannerBean>>
 
-            BannerPager(items = data.data){
+           HomeContent(data = data.data,
 
-                actions.enterArticle(
+               lazyPagingItems = lazyPagingItems,
 
-                    ArticleModel(
-
-                        title = it.title,
-                        link = it.url
-                    )
-
-                )
-
-            }
-
+               toArticleDetails = toArticleDetails)
 
         }
         
     }
 
 }
+
